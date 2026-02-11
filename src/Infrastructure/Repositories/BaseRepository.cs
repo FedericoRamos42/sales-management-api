@@ -44,7 +44,7 @@ namespace Infrastructure.Repositories
             return await result.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<T>> Search(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)
+        public async Task<List<T>> Search(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> result = _context.Set<T>();
 

@@ -37,6 +37,18 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpGet("export")]
+        public async Task<IActionResult> Export()
+        {
+            var fileBytes = await _services.ExportSales.Execute();
+
+            return File(
+                fileBytes,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                $"ventas_{DateTime.UtcNow:yyyyMMdd_HHmm}.xlsx"
+            );
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSaleRequest request)
         {

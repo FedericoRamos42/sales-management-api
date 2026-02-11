@@ -14,16 +14,16 @@ namespace Application.Services.Sales.Features
 {
     public class GetAllSales
     {
-       private readonly ISaleRepository _saleRepository;
+        private readonly IUnitOfWork _repository;
 
-        public GetAllSales(ISaleRepository saleRepository)
+        public GetAllSales(IUnitOfWork repository)
         {
-            _saleRepository = saleRepository;
+            _repository = repository;
         }
 
         public async Task<Result<List<SaleDto>>> Execute()
         {
-            var sales = await _saleRepository.GetAllSales();
+            var sales = await _repository.Sales.GetAllSales();
 
             var dto = sales.ToListDto();
             return Result<List<SaleDto>>.Succes(dto);

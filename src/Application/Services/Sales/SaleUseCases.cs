@@ -10,6 +10,7 @@ namespace Application.Services.Sales
     public record SaleUseCases(
         CreateSale CreateSale,
         GetAllSales GetAllSale,
-        GetSale GetSale
+        GetSale GetSale,
+        ExportSalesToExcel ExportSales
        );
 }
