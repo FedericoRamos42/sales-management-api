@@ -31,8 +31,22 @@ namespace Api.Controllers
             var result = await _categoryService.CreateCategory.Execute(request);
             if (!result.IsSucces)
             {
-                return BadRequest(new {errors = result.Errors});
+                return BadRequest(new { errors = result.Errors });
             }
+            return CreatedAtAction(
+                    nameof(GetAll),
+                     new { id = result.Value!.Id },
+                    result.Value
+                    );
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CreateCategoryForRequest request)
+        {
+            var result = await _categoryService.Update.Execute(id, request);
+            if(!result.IsSucces) 
+                return BadRequest(new { errors = result.Errors });
+
             return Ok(result);
         }
 

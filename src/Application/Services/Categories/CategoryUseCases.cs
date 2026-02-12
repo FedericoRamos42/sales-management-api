@@ -9,7 +9,8 @@ namespace Application.Services.Categories
 {
     public record CategoryUseCases(
         GetAllCategories GetAll,
-        CreateCategories CreateCategory
+        CreateCategories CreateCategory,
+        UpdateCategories Update
         );
     
         
