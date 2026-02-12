@@ -25,6 +25,17 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateCategoryForRequest request)
+        {
+            var result = await _categoryService.CreateCategory.Execute(request);
+            if (!result.IsSucces)
+            {
+                return BadRequest(new {errors = result.Errors});
+            }
+            return Ok(result);
+        }
+
         
 
 
