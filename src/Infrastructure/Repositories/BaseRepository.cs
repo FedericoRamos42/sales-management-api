@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories
              _context.Set<T>().Remove(entity);
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> result = _context.Set<T>();
 

@@ -5,6 +5,7 @@ using Application.Services.Categories.Models.Request;
 using Domain.Enitites;
 using Domain.Interfaces;
 using FluentValidation;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace Application.Services.Categories.Features
 
         private readonly IUnitOfWork _repository;
         private readonly IValidator<CreateCategoryForRequest> _validator;
+        private readonly ILogger<CreateCategories> _logger;
 
-        public CreateCategories(IUnitOfWork repository,IValidator<CreateCategoryForRequest> validator)
+        public CreateCategories(IUnitOfWork repository,IValidator<CreateCategoryForRequest> validator,ILogger<CreateCategories>logger)
         {
             _repository = repository;
             _validator = validator;
+            _logger = logger;
         }
         public async Task<Result<CategoryDto>> Execute(CreateCategoryForRequest request) 
         {
@@ -30,6 +33,7 @@ namespace Application.Services.Categories.Features
             if (!validationResult.IsValid)
             {
                 var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                _logger.LogWarning("Validation failed while creating category {@Request}. Errors: {@Errors}", request, errors);
                 return Result<CategoryDto>.Failure(errors);
             }
 

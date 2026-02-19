@@ -49,6 +49,7 @@ namespace Application.Services.Producto.Features
                 CategoryId = request.CategoryId,
                 Stock = request.Stock,
                 Prices = prices,
+                Category = category,
             };
 
             await _repository.Products.Create(product);

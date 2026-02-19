@@ -9,7 +9,7 @@ namespace Domain.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+        Task<T?> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
