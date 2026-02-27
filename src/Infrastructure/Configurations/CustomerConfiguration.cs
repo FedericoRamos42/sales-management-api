@@ -32,6 +32,11 @@ namespace Infrastructure.Configurations
             builder.Property(c => c.Address)
                     .HasMaxLength(200)
                     .IsRequired();
+
+            builder.HasOne(c=>c.Account)
+                    .WithOne(a=>a.Customer)
+                    .HasForeignKey<Account>(a => a.CustomerId)
+                    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

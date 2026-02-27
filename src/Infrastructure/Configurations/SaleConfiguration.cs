@@ -19,19 +19,24 @@ namespace Infrastructure.Configurations
 
 
             builder.Property(s => s.TotalAmount)
-                   .HasColumnType("decimal(18,2)")
-                   .IsRequired();
+                   .HasPrecision(18, 2);
+                   
+            builder.Property(s => s.PaidAmount)
+                    .HasPrecision(18, 2);
 
-            builder.Property(b => b.PaymenthMethod)
-                    .HasConversion<string>()
-                    .IsRequired();
-
-            builder.Property(b => b.CustomerId)
-                    .IsRequired();
+            builder.Property(s => s.Status)
+                   .HasConversion<string>();
 
             builder.HasOne(s => s.Customer)
                     .WithMany()
-                    .HasForeignKey(s=>s.CustomerId);
+                    .HasForeignKey(s=>s.CustomerId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(s => s.Payments)
+                    .WithOne()
+                    .HasForeignKey(p => p.SaleId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
            
 
         }

@@ -18,7 +18,7 @@ namespace Application.Services.Sales.Mappers
                 Id = sale.Id,
                 Date = sale.CreatedAt.ToString("dd/MM/yy"),
                 CustomerName = sale.Customer?.Name!,
-                PaymenthMethod = sale.PaymenthMethod.ToString(),
+                //PaymenthMethod = sale.PaymenthMethod.ToString(),
                 TotalAmount = sale.TotalAmount,
                 Items = sale.Items.Select(x => x.ToDto()).ToList(),
             };
@@ -31,7 +31,7 @@ namespace Application.Services.Sales.Mappers
                 Id = sale.Id,
                 Date = sale.CreatedAt.ToString("dd/MM/yy"),
                 CustomerName = customer.Name,
-                PaymenthMethod = sale.PaymenthMethod.ToString(),
+                //PaymenthMethod = sale.PaymenthMethod.ToString(),
                 TotalAmount = sale.TotalAmount,
                 Items = sale.Items.Select(x => x.ToDto()).ToList(),
             };

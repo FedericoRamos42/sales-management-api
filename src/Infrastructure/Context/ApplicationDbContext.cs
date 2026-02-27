@@ -21,6 +21,9 @@ namespace Infrastructure.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductPrice> ProductsPrices { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountMovement> AccountMovements { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,9 @@ namespace Infrastructure.Context
             modelBuilder.ApplyConfiguration(new SaleConfiguration());
             modelBuilder.ApplyConfiguration(new SaleDetailConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountMovementConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

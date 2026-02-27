@@ -13,5 +13,7 @@ namespace Domain.Enitites
         public string Email { get; set; } = default!;
         public string PhoneNumber { get; set; } = default!;
         public string Address { get; set; } = default!;
+
+        public Account Account { get; set; } = default!;
     }
 }

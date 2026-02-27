@@ -62,7 +62,7 @@ namespace Application.Services.Sales.Features
             Sale sale = new Sale()
             {
                 CustomerId = request.CustomerId,
-                PaymenthMethod = request.PaymentMethod,
+                //PaymenthMethod = request.PaymentMethod,
                 Items = details
             };
             sale.CalculateTotal();

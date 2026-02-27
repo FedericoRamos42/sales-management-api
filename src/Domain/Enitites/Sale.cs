@@ -11,15 +11,32 @@ namespace Domain.Enitites
     public class Sale : BaseEntity
     {
         public int CustomerId { get; set; }
-        public PaymentMethod PaymenthMethod { get; set; }
+        public decimal PaidAmount { get; private set; }
         public Customer Customer { get; set; } = default!;
         public decimal TotalAmount { get; set; }
+        public SaleStatus Status { get; set; }
         public ICollection<SaleDetail> Items { get; set; } = new List<SaleDetail>();
-
+        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
         public decimal CalculateTotal()
         {
             return TotalAmount = Items.Sum(d => d.Total);
+        }
+
+        public void RegisterPayment(decimal amount)
+        {
+            PaidAmount += amount;
+            UpdateStatus();
+        }
+
+        public void UpdateStatus()
+        {
+            if(PaidAmount == 0)
+                Status = SaleStatus.OnCredit;
+            else if (PaidAmount < TotalAmount)
+                Status = SaleStatus.PartialPaid;
+            else 
+                Status = SaleStatus.Paid;
         }
     }
 }
