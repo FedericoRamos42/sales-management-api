@@ -21,16 +21,37 @@ services:
       
      
       - ConnectionStrings__DefaultConnection=Data Source=/data/salesmanagement.db
-      - Admin__Email=${ADMIN_EMAIL:-admin@local.com}
-      - Admin__Password=${ADMIN_PASSWORD:-Admin123!}
-      - AppSettings__Token=${APP_TOKEN:-your-secret-key-must-be-at-least-32-characters-long-1234567890}
+      - Admin__Email=${ADMIN_EMAIL}
+      - Admin__Password=${ADMIN_PASSWORD}
+      - AppSettings__Token=${APP_TOKEN}
     
     volumes:
       - sqlite_data:/data
     
     restart: unless-stopped
+  
+  seq:
+    image:  datalust/seq:latest
+    container_name: log-api-seq1
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=admin123
+    ports:
+      - 5341:5341
+      - 8082:80
     
-   
+  frontend:
+    container_name: sales-management-front
+    build:
+      context: ../SalesManagement.Front/sales-management
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8080/api
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: unless-stopped
 
 volumes:
   sqlite_data:
