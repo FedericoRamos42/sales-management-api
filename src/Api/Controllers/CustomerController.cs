@@ -46,6 +46,17 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpGet("{id}/account/movements")]
+        public async Task<IActionResult> GetWithAccountDetails([FromRoute] int id)
+        {
+            var result = await _customerService.GetCustomerAccount.Execute(id);
+
+            if (!result.IsSucces)
+                return NotFound(new {errors = result.Errors });
+
+            return Ok(result.Value);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CustomerForRequest request)
         {

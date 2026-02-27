@@ -13,6 +13,7 @@ namespace Domain.Interfaces
         ICustomerRepository Customers { get; }
         ICategoryRepository Categories { get; }
         IDashboardRepository Dashboard { get; }
+        IAccountRepository Accounts { get; }
         Task SaveChangesAsync();
     }
 }

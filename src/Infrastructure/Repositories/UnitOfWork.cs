@@ -16,13 +16,17 @@ namespace Infrastructure.Repositories
         public ICustomerRepository Customers { get; }
         public ISaleRepository Sales { get; }
         public IDashboardRepository Dashboard { get; }
+
+        public IAccountRepository Accounts {  get; }
+
         public UnitOfWork(
             ApplicationDbContext context,
             ISaleRepository sales,
             IProductRepository products,
             ICustomerRepository customers,
             ICategoryRepository categories,
-            IDashboardRepository dashboard)
+            IDashboardRepository dashboard,
+            IAccountRepository accounts)
         {
             Sales = sales;
             Categories = categories;
@@ -30,6 +34,7 @@ namespace Infrastructure.Repositories
             Customers = customers;
             _context = context;
             Dashboard = dashboard;
+            Accounts = accounts;
         }
         public Task SaveChangesAsync()
         {

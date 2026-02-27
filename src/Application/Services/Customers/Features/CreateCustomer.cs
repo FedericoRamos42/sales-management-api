@@ -34,6 +34,7 @@ namespace Application.Services.Customers.Features
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
+                Account = new Account()
             };
 
             await _repository.Customers.Create(customer);

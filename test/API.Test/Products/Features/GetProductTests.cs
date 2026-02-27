@@ -57,5 +57,6 @@ namespace API.Test.Products.Features
             result.IsSucces.Should().BeTrue();
             result.Value.Should().NotBeNull();
 
-        }        }
+        }
+    }
 }
