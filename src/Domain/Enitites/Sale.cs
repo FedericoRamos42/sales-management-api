@@ -23,20 +23,27 @@ namespace Domain.Enitites
             return TotalAmount = Items.Sum(d => d.Total);
         }
 
-        public void RegisterPayment(decimal amount)
+        public void RegisterPayment(decimal amount,PaymentMethod method)
         {
             PaidAmount += amount;
             UpdateStatus();
+            Payments.Add(new Payment (amount, method));
         }
 
         public void UpdateStatus()
         {
             if(PaidAmount == 0)
+            {
                 Status = SaleStatus.OnCredit;
+            }
             else if (PaidAmount < TotalAmount)
+            {
                 Status = SaleStatus.PartialPaid;
-            else 
+            }
+            else
+            {
                 Status = SaleStatus.Paid;
+            }
         }
     }
 }

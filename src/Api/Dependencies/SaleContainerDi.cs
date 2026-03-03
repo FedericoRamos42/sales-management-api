@@ -1,5 +1,6 @@
 ﻿using Application.Services.Sales;
 using Application.Services.Sales.Features;
+using Application.Services.Sales.Models.Request;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
 
@@ -14,6 +15,7 @@ namespace Api.Dependencies
             services.AddScoped<GetAllSales>();
             services.AddScoped<GetSale>();
             services.AddScoped<ExportSalesToExcel>();
+            services.AddScoped<RegisterPaymentRequest>();
             services.AddScoped<SaleUseCases>();
 
         }

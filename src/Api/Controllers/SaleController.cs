@@ -61,6 +61,20 @@ namespace Api.Controllers
                 result.Value 
             );
         }
+        [HttpPost("{id}/payments")]
+        public async Task<IActionResult> RegisterPayment([FromRoute] int id, [FromBody] RegisterPaymentRequest request)
+        {
+            var result = await _services.RegisterPayment.Execute(id, request);
+
+            if (!result.IsSucces)
+                return BadRequest(new {errors = result.Errors});
+
+            return CreatedAtAction(
+                nameof(Get),
+                new { id = result.Value!.Id },
+                result.Value
+                );
+        }
 
         
         

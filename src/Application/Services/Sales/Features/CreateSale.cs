@@ -22,22 +22,22 @@ namespace Application.Services.Sales.Features
         public async Task<Result<SaleDto>> Execute(CreateSaleRequest request)
         {
             var validation = await _validator.ValidateAsync(request);
-            if(!validation.IsValid)
+            if (!validation.IsValid)
             {
-               var errors =  validation.Errors.Select(e=>e.ErrorMessage).ToList();
+                var errors = validation.Errors.Select(e => e.ErrorMessage).ToList();
                 return Result<SaleDto>.Failure(errors);
             }
 
-            var customer = await _repository.Customers.Get(c=> c.Id == request.CustomerId);
+            var customer = await _repository.Customers.Get(c => c.Id == request.CustomerId);
 
             if (customer is null)
                 return Result<SaleDto>.Failure($"customer with id {request.CustomerId} does not exist");
 
             var details = new List<SaleDetail>();
 
-            foreach (var detail in request.Details) 
+            foreach (var detail in request.Details)
             {
-                Product product = await _repository.Products.Get(p=> p.Id == detail.ProductId, p=> p.Prices);
+                Product product = await _repository.Products.Get(p => p.Id == detail.ProductId, p => p.Prices);
 
                 if (product is null)
                     return Result<SaleDto>.Failure($"product with id {detail.ProductId} does not exist");
@@ -62,12 +62,35 @@ namespace Application.Services.Sales.Features
             Sale sale = new Sale()
             {
                 CustomerId = request.CustomerId,
-                //PaymenthMethod = request.PaymentMethod,
                 Items = details
             };
+
             sale.CalculateTotal();
 
+            if(request.InitialPaymentAmount > sale.TotalAmount)
+            {
+                return Result<SaleDto>.Failure($"initial paymenth is invalid");
+            }
+
+            if(request.InitialPaymentAmount > 0)
+            {
+                sale.RegisterPayment(request.InitialPaymentAmount, request.Method!.Value);
+            }
+
+
             await _repository.Sales.Create(sale);
+            await _repository.SaveChangesAsync();
+
+            var debt = sale.TotalAmount - sale.PaidAmount;
+
+            if (debt > 0)
+            {
+                customer.Account.AddMovement(
+                    -debt,
+                    $"Debt from sale #{sale.Id}"
+                    );
+            }
+
             await _repository.SaveChangesAsync();
 
             var dto = sale.ToDto(customer);

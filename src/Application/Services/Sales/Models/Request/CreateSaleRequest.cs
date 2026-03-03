@@ -10,7 +10,8 @@ namespace Application.Services.Sales.Models.Request
     public class CreateSaleRequest
     {
         public int CustomerId { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+        public decimal InitialPaymentAmount { get; set; }
+        public PaymentMethod? Method { get; set; }
         public List<CreateDetailRequest> Details { get; set; } = default!;
     }
 }

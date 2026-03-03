@@ -11,6 +11,7 @@ namespace Application.Services.Sales
         CreateSale CreateSale,
         GetAllSales GetAllSale,
         GetSale GetSale,
+        RegisterSalePayment RegisterPayment,
         ExportSalesToExcel ExportSales
        );
 }

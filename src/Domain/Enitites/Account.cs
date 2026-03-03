@@ -14,7 +14,7 @@ namespace Domain.Enitites
         public Customer Customer { get; set; } = default!;
         public ICollection<AccountMovement> Movements { get; set; } = new List<AccountMovement>();
 
-        public void AddMovement(decimal  amount,string description)
+        public void AddMovement(decimal amount,string description)
         {
             Balance += amount;
 
