@@ -41,9 +41,9 @@ namespace Application.Services.Sales.Features
                 return Result<SaleDto>.Failure($"sale with id {id} does not exist");
             }
 
-            if(sale.Status == SaleStatus.Paid)
+            if(sale.Status == SaleStatus.Paid || sale.Status == SaleStatus.Canceled)
             {
-                return Result<SaleDto>.Failure($"this sale has been paid");
+                return Result<SaleDto>.Failure($"this sale has been paid or canceled");
             }
 
             if(request.Amount > sale.TotalAmount - sale.PaidAmount)

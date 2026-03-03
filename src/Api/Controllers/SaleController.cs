@@ -25,8 +25,8 @@ namespace Api.Controllers
         {
             var result = await _services.GetSale.Execute(id);
             if (!result.IsSucces)
-                return NotFound(new {errors = result.Errors});
-            
+                return NotFound(new { errors = result.Errors });
+
             return Ok(result.Value);
         }
 
@@ -49,12 +49,26 @@ namespace Api.Controllers
             );
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var result = await _services.CancelSale.Execute(id);
+
+            if (!result.IsSucces)
+                return BadRequest(new { errors = result.Errors });
+
+            return Ok(result.Value);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSaleRequest request)
         {
             var result = await _services.CreateSale.Execute(request);
+
             if (!result.IsSucces) 
                 return BadRequest(new { errors = result.Errors });
+
             return CreatedAtAction(
                 nameof(Get), 
                 new { id = result.Value!.Id }, 

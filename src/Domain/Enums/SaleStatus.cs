@@ -11,6 +11,7 @@ namespace Domain.Enums
         OnCredit,
         PartialPaid,
         Paid,
+        Canceled,
         
     }
 }
