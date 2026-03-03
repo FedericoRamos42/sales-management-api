@@ -11,5 +11,6 @@ namespace Application.Services.Login.Interfaces
     public interface IAuthService
     {
         string CreateToken(Admin user);
+        string CreateRefreshToken();
     }
 }

@@ -33,7 +33,7 @@ namespace Infrastructure.Configurations
                     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(s => s.Payments)
-                    .WithOne()
+                    .WithOne(p=>p.Sale)
                     .HasForeignKey(p => p.SaleId)
                     .OnDelete(DeleteBehavior.Cascade);
 

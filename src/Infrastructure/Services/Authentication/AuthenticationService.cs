@@ -7,6 +7,8 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Application.Services.Login.Interfaces;
 using Domain.Enitites;
+using System.Buffers.Text;
+using System.Security.Cryptography;
 
 namespace Infrastructure.Services.Authentication
 {
@@ -52,6 +54,11 @@ namespace Infrastructure.Services.Authentication
 
             return new JwtSecurityTokenHandler().WriteToken(token);
 
+        }
+
+        public string CreateRefreshToken()
+        {
+            return Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
         }
 
     }

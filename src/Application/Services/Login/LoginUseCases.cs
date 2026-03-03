@@ -9,8 +9,8 @@ namespace Application.Services.Login
 {
     public record LoginUseCases(
         
-        LoginAdmin LoginAdmin
-
+        LoginAdmin LoginAdmin,
+        LoginWithRefreshToken LoginWithRefreshToken
         
         );
 }

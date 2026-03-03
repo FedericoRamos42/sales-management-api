@@ -1,6 +1,7 @@
 ﻿using Domain.Enitites;
 using Domain.Interfaces;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,15 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task AddRefreshToken(RefreshToken token)
+        {
+            await _context.Set<RefreshToken>().AddAsync(token);
+            await _context.SaveChangesAsync();
+        }
 
+        public Task<RefreshToken?> GetRefreshToken(string refreshToken)
+        {
+            return _context.Set<RefreshToken>().Include(r=>r.Admin).FirstOrDefaultAsync(r=>r.Token == refreshToken);
+        }
     }
 }

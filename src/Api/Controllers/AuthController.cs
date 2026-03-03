@@ -1,5 +1,6 @@
 ﻿using Application.Services.Login;
-using Application.Services.Login.Models;
+using Application.Services.Login.Features;
+using Application.Services.Login.Models.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,17 @@ namespace Api.Controllers
                 return Unauthorized(new {errors = result.Errors});
 
             return Ok(new {token = result.Value});
+        }
+
+        [HttpPost("login/refresh-token")]
+        public async Task<IActionResult> Login(RefreshTokenRequest request)
+        {
+            var result = await _services.LoginWithRefreshToken.Execute(request);
+
+            if (!result.IsSucces)
+                return Unauthorized(new { errors = result.Errors });
+
+            return Ok(result.Value);
         }
     }
 }

@@ -13,8 +13,9 @@ namespace Api.Dependencies
         {
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IAuthService,AuthenticationService>();
-            services.AddScoped<LoginUseCases>();
+            services.AddScoped<LoginWithRefreshToken>();
             services.AddScoped<LoginAdmin>();
+            services.AddScoped<LoginUseCases>();
         }
     }
 }

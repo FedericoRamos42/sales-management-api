@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Login.Models
+namespace Application.Services.Login.Models.Request
 {
     public class LoginRequest
     {

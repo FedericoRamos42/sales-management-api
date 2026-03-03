@@ -9,6 +9,7 @@ namespace Domain.Interfaces
 {
     public interface IAuthRepository : IBaseRepository<Admin>
     {
-
+        Task AddRefreshToken(RefreshToken token);
+        Task<RefreshToken?> GetRefreshToken(string refreshToken);
     }
 }

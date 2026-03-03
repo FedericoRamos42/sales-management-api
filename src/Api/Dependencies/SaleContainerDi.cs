@@ -15,7 +15,7 @@ namespace Api.Dependencies
             services.AddScoped<GetAllSales>();
             services.AddScoped<GetSale>();
             services.AddScoped<ExportSalesToExcel>();
-            services.AddScoped<RegisterPaymentRequest>();
+            services.AddScoped<RegisterSalePayment>();
             services.AddScoped<CancelSale>();
             services.AddScoped<SaleUseCases>();
 
