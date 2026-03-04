@@ -24,6 +24,7 @@ namespace Infrastructure.Context
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountMovement> AccountMovements { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<CalendarEvent>CalendarEvents { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
