@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories
         public ICustomerRepository Customers { get; }
         public ISaleRepository Sales { get; }
         public IDashboardRepository Dashboard { get; }
-        public IAuthRepository Admins { get; }
+        public IAuthRepository Auths { get; }
         public IAccountRepository Accounts {  get; }
         public ICalendarEventRepository CalendarEvents { get; }
 
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories
             Dashboard = dashboard;
             Accounts = accounts;
             CalendarEvents = calendarEvents;
-            Admins = admins;
+            Auths = admins;
         }
         public Task SaveChangesAsync()
         {

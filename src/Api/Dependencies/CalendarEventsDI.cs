@@ -11,7 +11,9 @@ namespace Api.Dependencies
         {
             services.AddScoped<ICalendarEventRepository, CalendarEventRepository>();
             services.AddScoped<GetCalendarEvent>();
+            services.AddScoped<GetCalendarEvents>();
             services.AddScoped<CreateCalendarEvent>();
+
             services.AddScoped<CalendarUseCases>();
         }
     }

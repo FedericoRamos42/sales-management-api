@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Application.Services.Calendar
 {
     public record CalendarUseCases(
-        GetCalendarEvent GetCalendar,
-        CreateCalendarEvent CreateCalendar
+        GetCalendarEvents GetCalendar,
+        CreateCalendarEvent CreateCalendar,
+        GetCalendarEvent GetEvent
         );
 }

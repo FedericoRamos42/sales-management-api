@@ -34,6 +34,17 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEvent(int id)
+        {
+            var result = await _services.GetEvent.Execute(id);
+            if (!result.IsSucces)
+            {
+                return NotFound(new { errors = result.Errors });
+            }
+            return Ok(result.Value);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateCalendarEventsRequest request)
         {

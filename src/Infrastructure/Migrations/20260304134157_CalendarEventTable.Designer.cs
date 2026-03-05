@@ -12,7 +12,7 @@ namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260304134157_calendar-events-table")]
-    partial class calendareventstable
+    partial class CalendarEventsTable : Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

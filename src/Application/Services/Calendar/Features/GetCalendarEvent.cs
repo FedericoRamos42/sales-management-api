@@ -1,11 +1,11 @@
 ﻿using Application.Result;
 using Application.Services.Calendar.Mappers;
 using Application.Services.Calendar.Models;
-using Application.Services.Calendar.Models.Request;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,20 +18,16 @@ namespace Application.Services.Calendar.Features
         {
             _repository = repository;
         }
-
-        public async Task<Result<List<CalendarEventDto>>> Execute(int adminId, GetCalendarEventsRequest request)
+        public async Task<Result<CalendarEventDto>> Execute(int id)
         {
-            var admin = await _repository.Auths.Get(a=> a.Id == adminId);
-
-            if(admin is null)
+            var calendarEvent = await _repository.CalendarEvents.Get(c=>c.Id == id);
+            
+            if(calendarEvent is null)
             {
-                return Result<List<CalendarEventDto>>.Failure($"admin with id {adminId} does not exist");
+                return Result<CalendarEventDto>.Failure($"event with id {id} does not exist");
             }
 
-            var events = await _repository.CalendarEvents.Search(a=>a.AdminId == adminId && a.StartDate <= request.DateEnd && a.EndDate >= request.DateStart);
-
-            return Result<List<CalendarEventDto>>.Succes(events.ToListDto());
-
+            return Result<CalendarEventDto>.Succes(calendarEvent.ToDto());
         }
     }
 }
