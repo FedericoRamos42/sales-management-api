@@ -37,6 +37,8 @@ CustomerContainerDI.Register(builder.Services);
 SaleContainerDi.Register(builder.Services);
 AuthContainerDi.Register(builder.Services);
 DashboardContainerDI.Register(builder.Services);
+CalendarEventsDI.Register(builder.Services);
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ISalesExcelExporter, SalesExcelExporter>();
 builder.Services.AddScoped<AdminSeeder>();

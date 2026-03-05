@@ -14,6 +14,8 @@ namespace Domain.Interfaces
         ICategoryRepository Categories { get; }
         IDashboardRepository Dashboard { get; }
         IAccountRepository Accounts { get; }
+        ICalendarEventRepository CalendarEvents { get; }
+        IAuthRepository Auths { get; }
         Task SaveChangesAsync();
     }
 }

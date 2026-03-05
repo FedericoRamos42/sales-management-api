@@ -16,8 +16,9 @@ namespace Infrastructure.Repositories
         public ICustomerRepository Customers { get; }
         public ISaleRepository Sales { get; }
         public IDashboardRepository Dashboard { get; }
-
+        public IAuthRepository Admins { get; }
         public IAccountRepository Accounts {  get; }
+        public ICalendarEventRepository CalendarEvents { get; }
 
         public UnitOfWork(
             ApplicationDbContext context,
@@ -26,7 +27,9 @@ namespace Infrastructure.Repositories
             ICustomerRepository customers,
             ICategoryRepository categories,
             IDashboardRepository dashboard,
-            IAccountRepository accounts)
+            IAccountRepository accounts,
+            ICalendarEventRepository calendarEvents,
+            IAuthRepository admins)
         {
             Sales = sales;
             Categories = categories;
@@ -35,6 +38,8 @@ namespace Infrastructure.Repositories
             _context = context;
             Dashboard = dashboard;
             Accounts = accounts;
+            CalendarEvents = calendarEvents;
+            Admins = admins;
         }
         public Task SaveChangesAsync()
         {

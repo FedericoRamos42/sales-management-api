@@ -15,6 +15,7 @@ namespace Api.Dependencies
             services.AddScoped<IAuthService,AuthenticationService>();
             services.AddScoped<LoginWithRefreshToken>();
             services.AddScoped<LoginAdmin>();
+            services.AddScoped<IUserContext,UserContext>(); 
             services.AddScoped<LoginUseCases>();
         }
     }
