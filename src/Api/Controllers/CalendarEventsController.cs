@@ -58,5 +58,16 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _services.DeleteEvent.Execute(id);
+            if (!result.IsSucces)
+            {
+                return NotFound(new { errors = result.Errors });
+            }
+            return Ok(result.Value);
+        }
+
     }
 }

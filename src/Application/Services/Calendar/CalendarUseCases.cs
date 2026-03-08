@@ -10,6 +10,7 @@ namespace Application.Services.Calendar
     public record CalendarUseCases(
         GetCalendarEvents GetCalendar,
         CreateCalendarEvent CreateCalendar,
-        GetCalendarEvent GetEvent
+        GetCalendarEvent GetEvent,
+        DeleteCalendarEvent DeleteEvent
         );
 }
