@@ -14,6 +14,7 @@ namespace Api.Dependencies
             services.AddScoped<GetCalendarEvents>();
             services.AddScoped<CreateCalendarEvent>();
             services.AddScoped<DeleteCalendarEvent>();
+            services.AddScoped<UpdateCalendarEvent>();
             services.AddScoped<CalendarUseCases>();
         }
     }

@@ -13,7 +13,7 @@ namespace Application.Services.Calendar.Validators
     {
         public CalendarEventValidator()
         {
-            RuleFor(a => a.AdminId).GreaterThan(0);
+
             RuleFor(a => a.Title).MaximumLength(100);
             RuleFor(a=>a.Description).MaximumLength(200);
             RuleFor(a => a.Type).IsInEnum();

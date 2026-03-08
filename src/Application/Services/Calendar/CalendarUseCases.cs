@@ -11,6 +11,8 @@ namespace Application.Services.Calendar
         GetCalendarEvents GetCalendar,
         CreateCalendarEvent CreateCalendar,
         GetCalendarEvent GetEvent,
-        DeleteCalendarEvent DeleteEvent
+        DeleteCalendarEvent DeleteEvent,
+        UpdateCalendarEvent UpdateEvent
+
         );
 }

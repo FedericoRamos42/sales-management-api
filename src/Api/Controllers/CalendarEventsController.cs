@@ -58,6 +58,18 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id , CreateCalendarEventsRequest request)
+        {
+            var result = await _services.UpdateEvent.Execute(id,request);
+            if (!result.IsSucces)
+            {
+                return BadRequest(new { errors = result.Errors });
+            }
+
+            return Ok(result.Value);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
