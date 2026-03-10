@@ -47,7 +47,7 @@ namespace Api.Controllers
             if(!result.IsSucces) 
                 return BadRequest(new { errors = result.Errors });
 
-            return Ok(result);
+            return Ok(result.Value);
         }
 
         
