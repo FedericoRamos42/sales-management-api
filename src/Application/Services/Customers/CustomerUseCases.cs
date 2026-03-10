@@ -14,6 +14,7 @@ namespace Application.Services.Customers
         SearchCustomer Search,
         GetCustomer Get,
         DeleteCustomer DeleteCustomer,
-        GetCustomerAccount GetCustomerAccount
+        GetCustomerAccount GetCustomerAccount,
+        CreateAccountMovement CreateMovement
         );
 }

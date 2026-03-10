@@ -57,6 +57,17 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
+        [HttpPost("{id}/account-movement")]
+        public async Task<IActionResult> CreateMovement(int id,CreateMovementRequest request)
+        {
+            var result = await _customerService.CreateMovement.Execute(id, request);
+            if (!result.IsSucces)
+            {
+                return BadRequest(new {errors = result.Errors});
+            }
+            return Ok(result.Value);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CustomerForRequest request)
         {
