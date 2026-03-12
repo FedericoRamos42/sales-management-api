@@ -36,7 +36,9 @@ namespace Infrastructure.Repositories
              _context.Set<T>().Remove(entity);
         }
 
-        public async Task<T?> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> Get(
+            Expression<Func<T, bool>> predicate,
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> result = _context.Set<T>();
 
@@ -46,20 +48,28 @@ namespace Infrastructure.Repositories
             return await result.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<List<T>> GetByPagination<TKey>(Expression<Func<T,TKey>>orderBy ,int pageIndex, int pageSize)
+        public async Task<List<T>> GetByPagination<TKey>(
+            Expression<Func<T,TKey>> orderby,
+            int pageIndex, 
+            int pageSize, 
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _context.Set<T>();
-            var result =  await query
-                      .OrderBy(orderBy)
-                      .Skip((pageIndex - 1) * pageSize)
-                      .Take(pageSize)
-                      .ToListAsync();
 
-            return result;
+            foreach(var include in includes)
+                query = query.Include(include);
+
+             return await query
+                            .OrderBy(orderby)
+                            .Skip((pageIndex - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
 
         }
 
-        public async Task<List<T>> Search(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)
+        public async Task<List<T>> Search(
+            Expression<Func<T, bool>>? filter = null, 
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> result = _context.Set<T>();
 

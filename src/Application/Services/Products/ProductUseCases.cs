@@ -11,7 +11,7 @@ namespace Application.Services.Producto
     public record ProductUseCases(
         CreateProduct CreateProduct,
         UpdateProductStock UpdateProductStock,
-        GetAllProduct GetAllProduct,
+        GetProducts GetByPagination,
         GetProduct GetProduct,
         UpdateProductPrice UpdateProductPrice,
         DeleteProduct DeleteProduct

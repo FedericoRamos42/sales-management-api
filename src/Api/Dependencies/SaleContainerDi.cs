@@ -12,7 +12,7 @@ namespace Api.Dependencies
         {
             services.AddScoped<ISaleRepository,SaleRepository>();
             services.AddScoped<CreateSale>();
-            services.AddScoped<GetAllSales>();
+            services.AddScoped<GetSales>();
             services.AddScoped<GetSale>();
             services.AddScoped<ExportSalesToExcel>();
             services.AddScoped<RegisterSalePayment>();

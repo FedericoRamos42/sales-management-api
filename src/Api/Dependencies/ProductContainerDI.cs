@@ -19,7 +19,7 @@ namespace Api.Dependencies
             services.AddScoped<CreateProduct>();
             services.AddScoped<UpdateProductStock>();
             services.AddScoped<DeleteProduct>();
-            services.AddScoped<GetAllProduct>();
+            services.AddScoped<GetProducts>();
             services.AddScoped<ProductUseCases>();
             services.AddScoped<GetProduct>();
             services.AddScoped<UpdateProductPrice>();

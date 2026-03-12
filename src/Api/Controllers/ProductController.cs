@@ -1,5 +1,6 @@
 ﻿using Application.Services.Producto;
 using Application.Services.Products.Models.Request;
+using Application.Utils.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +27,11 @@ namespace Api.Controllers
 
             return Ok(result.Value);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetByPagination([FromQuery] PaginationParams request)
         {
-            var result = await _productService.GetAllProduct.Execute();
+            var result = await _productService.GetByPagination.Execute(request);
             return Ok(result.Value);
         }
 

@@ -12,11 +12,11 @@ using Domain.Interfaces;
 
 namespace Application.Services.Sales.Features
 {
-    public class GetAllSales
+    public class GetSales
     {
         private readonly IUnitOfWork _repository;
 
-        public GetAllSales(IUnitOfWork repository)
+        public GetSales(IUnitOfWork repository)
         {
             _repository = repository;
         }
