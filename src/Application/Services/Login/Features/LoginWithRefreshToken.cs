@@ -1,7 +1,7 @@
-﻿using Application.Result;
-using Application.Services.Login.Interfaces;
+﻿using Application.Services.Login.Interfaces;
 using Application.Services.Login.Models.Request;
 using Application.Services.Login.Models.Response;
+using Application.Utils.Result;
 using Domain.Enitites;
 using Domain.Interfaces;
 using System;

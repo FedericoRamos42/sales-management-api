@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Utils.Pagination;
+using Application.Utils.Result;
 using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +44,19 @@ namespace Infrastructure.Repositories
                 result = result.Include(include);
 
             return await result.FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<List<T>> GetByPagination<TKey>(Expression<Func<T,TKey>>orderBy ,int pageIndex, int pageSize)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            var result =  await query
+                      .OrderBy(orderBy)
+                      .Skip((pageIndex - 1) * pageSize)
+                      .Take(pageSize)
+                      .ToListAsync();
+
+            return result;
+
         }
 
         public async Task<List<T>> Search(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)

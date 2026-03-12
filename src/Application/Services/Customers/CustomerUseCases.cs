@@ -10,7 +10,7 @@ namespace Application.Services.Customers
     public record CustomerUseCases(
         CreateCustomer CreateCustomer,
         UpdateCustomer UpdateCustomer,
-        GetAllCustomer GetAll,
+        GetCustomers GetPagination,
         SearchCustomer Search,
         GetCustomer Get,
         DeleteCustomer DeleteCustomer,

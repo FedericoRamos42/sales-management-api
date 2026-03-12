@@ -1,7 +1,7 @@
-﻿using Application.Result;
-using Application.Services.Customers.Mappers;
+﻿using Application.Services.Customers.Mappers;
 using Application.Services.Customers.Models;
 using Application.Services.Customers.Models.Request;
+using Application.Utils.Result;
 using Domain.Enitites;
 using Domain.Interfaces;
 using FluentValidation;

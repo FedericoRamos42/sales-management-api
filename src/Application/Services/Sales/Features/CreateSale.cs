@@ -1,7 +1,7 @@
-﻿using Application.Result;
-using Application.Services.Sales.Mappers;
+﻿using Application.Services.Sales.Mappers;
 using Application.Services.Sales.Models;
 using Application.Services.Sales.Models.Request;
+using Application.Utils.Result;
 using Domain.Enitites;
 using Domain.Interfaces;
 using FluentValidation;

@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Result
+namespace Application.Utils.Result
 {
     public class Result<T> where T : class
     {

@@ -1,5 +1,5 @@
-﻿using Application.Result;
-using Application.Services.Customers.Models.Response;
+﻿using Application.Services.Customers.Models.Response;
+using Application.Utils.Result;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;

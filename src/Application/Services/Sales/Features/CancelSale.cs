@@ -1,6 +1,6 @@
-﻿using Application.Result;
-using Application.Services.Sales.Mappers;
+﻿using Application.Services.Sales.Mappers;
 using Application.Services.Sales.Models;
+using Application.Utils.Result;
 using Domain.Enums;
 using Domain.Interfaces;
 using System.Diagnostics;

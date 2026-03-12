@@ -1,6 +1,6 @@
-﻿using Application.Result;
-using Application.Services.Customers.Mappers;
+﻿using Application.Services.Customers.Mappers;
 using Application.Services.Customers.Models;
+using Application.Utils.Result;
 using Domain.Interfaces;
 
 namespace Application.Services.Customers.Features

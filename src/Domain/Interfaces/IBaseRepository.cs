@@ -15,7 +15,9 @@ namespace Domain.Interfaces
         Task Delete(T entity);
         Task<int>Count(); 
         Task<List<T>> Search(Expression<Func<T,bool>>? filter = null, params Expression<Func<T, object>>[] includes);
-       
+        Task<List<T>> GetByPagination<TKey>(Expression<Func<T, TKey>> orderBy, int pageIndex, int pageSize);
+
+
 
     }
 }

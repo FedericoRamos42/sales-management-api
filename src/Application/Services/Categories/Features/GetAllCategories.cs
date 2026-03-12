@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Result;
 using Application.Services.Categories;
 using Application.Services.Categories.Mappers;
 using Application.Services.Categories.Models;
+using Application.Utils.Result;
 using Domain.Enitites;
 using Domain.Interfaces;
 
