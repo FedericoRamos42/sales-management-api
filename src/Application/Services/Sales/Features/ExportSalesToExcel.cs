@@ -22,7 +22,7 @@ namespace Application.Services.Sales.Features
 
         public async Task<byte[]> Execute()
         {
-            var sales = await _repository.Sales.GetAllSales();
+            var sales = await _repository.Sales.GetAll();
 
             var salesDto = sales.ToListDto();
             return _excelExporter.ExportSalesToExcel(salesDto);

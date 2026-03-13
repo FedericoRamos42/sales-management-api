@@ -43,7 +43,11 @@ namespace Api.Controllers
         [HttpGet("pagination")]
         public async Task<IActionResult> GetPagination([FromQuery] PaginationParams request)
         {
-            var result = await _customerService.GetPagination.Execute(request.PageIndex,request.PageSize);
+            var result = await _customerService.GetPagination.Execute(request);
+            if (!result.IsSucces)
+            {
+                return BadRequest(new {errors = result.Errors});
+            }
             return Ok(result.Value);
         }
 

@@ -1,6 +1,7 @@
 ﻿using Application.Services.Sales;
 using Application.Services.Sales.Features;
 using Application.Services.Sales.Models.Request;
+using Application.Utils.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,15 +31,17 @@ namespace Api.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParams request)
         {
-            var result = await _services.GetAllSale.Execute();
+            var result = await _services.GetSalesByPagination.Execute(request);
+            if (!result.IsSucces)
+                return BadRequest(new { errors = result.Errors });
             return Ok(result.Value);
         }
 
         [HttpGet("export")]
-        public async Task<IActionResult> Export()
+        public async Task<IActionResult> ExportToExcel()
         {
             var fileBytes = await _services.ExportSales.Execute();
 

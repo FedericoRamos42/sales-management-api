@@ -1,5 +1,4 @@
-﻿using Application.Result;
-using Application.Services.Customers.Features;
+﻿using Application.Services.Customers.Features;
 using Application.Services.Customers.Models.Request;
 using Domain.Enitites;
 using Domain.Interfaces;

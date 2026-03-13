@@ -18,12 +18,27 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<Sale>> GetAllSales()
+        public async Task<List<Sale>> GetAll()
         {
-            var sales = await _context.Sales.Include(s => s.Customer)
-                                            .Include(s => s.Items)
-                                            .ThenInclude(i => i.Product).ToListAsync();
-            return sales;
+            return await _context.Sales.Include(s => s.Customer)
+                                       .Include(s => s.Items)
+                                            .ThenInclude(i => i.Product)
+                                      .ToListAsync();
         }
+
+        public async Task<List<Sale>> GetAllSalesByPagination(int pageIndex, int pageSize)
+        {
+            return await _context.Sales
+                                      .Include(s => s.Customer)
+                                      .Include(s => s.Items)
+                                           .ThenInclude(i => i.Product)
+                                      .OrderBy(s=>s.Id)
+                                      .Skip((pageIndex - 1) * pageSize)
+                                      .Take(pageSize)
+                                      .ToListAsync();
+            
+        }
+
+       
     }
 }

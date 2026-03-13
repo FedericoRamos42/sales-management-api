@@ -9,6 +9,7 @@ namespace Domain.Interfaces
 {
     public interface ISaleRepository : IBaseRepository<Sale>
     {
-        Task<List<Sale>> GetAllSales(); 
+        Task<List<Sale>> GetAllSalesByPagination(int pageIndex, int pageSize);
+        Task<List<Sale>> GetAll();
     }
 }

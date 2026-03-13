@@ -1,32 +1,45 @@
-﻿using System;
+﻿using Application.Services.Products.Models;
+using Application.Services.Sales.Mappers;
+using Application.Services.Sales.Models;
+using Application.Utils.Pagination;
+using Application.Utils.Result;
+using Domain.Enitites;
+using Domain.Interfaces;
+using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Services.Sales.Mappers;
-using Application.Services.Sales.Models;
-using Application.Utils.Result;
-using Domain.Enitites;
-
-using Domain.Interfaces;
 
 namespace Application.Services.Sales.Features
 {
     public class GetSales
     {
         private readonly IUnitOfWork _repository;
-
-        public GetSales(IUnitOfWork repository)
+        private readonly IValidator<PaginationParams> _validator;
+        public GetSales(IUnitOfWork repository,IValidator<PaginationParams>validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
-        public async Task<Result<List<SaleDto>>> Execute()
+        public async Task<Result<PaginationList<SaleDto>>> Execute(PaginationParams request)
         {
-            var sales = await _repository.Sales.GetAllSales();
+            var validation = await _validator.ValidateAsync(request);
+            if (!validation.IsValid)
+            {
+                var errors = validation.Errors.Select(s => s.ErrorMessage).ToList();
+                return Result<PaginationList<SaleDto>>.Failure(errors);
+            }
+
+            var sales = await _repository.Sales.GetAllSalesByPagination(request.PageIndex, request.PageSize);
+            var count = await _repository.Sales.Count();
+            var totalPages = (int) Math.Ceiling((double)count / request.PageSize);
 
             var dto = sales.ToListDto();
-            return Result<List<SaleDto>>.Succes(dto);
+            var pagination = new PaginationList<SaleDto>(dto,request.PageIndex,totalPages);
+            return Result<PaginationList<SaleDto>>.Succes(pagination);
         }
     }
 }
